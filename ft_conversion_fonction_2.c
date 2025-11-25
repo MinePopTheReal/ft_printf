@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_conversion_fonction_2.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/21 10:07:28 by tmaldert          #+#    #+#             */
-/*   Updated: 2025/11/25 13:45:53 by tmalpert         ###   ########.fr       */
+/*   Created: 2025/11/25 13:41:55 by tmalpert          #+#    #+#             */
+/*   Updated: 2025/11/25 13:46:21 by tmalpert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
-#include <limits.h>
 
-int	main(void)
+int	ft_adress(void	*p)
 {
-	printf("%p\n", NULL);
-	ft_printf("%p\n", NULL);
-	return (0);
+	unsigned long int	addr;
+	int					count;
+
+	if (!p)
+		return (ft_putstr("(nil)"));
+	addr = (unsigned long int)p;
+	count = ft_putstr("0x");
+	count += ft_putnbr_hex(addr, 16, 0);
+	return (count);
 }

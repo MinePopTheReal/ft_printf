@@ -6,7 +6,7 @@
 /*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:51:18 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/11/25 13:03:14 by tmalpert         ###   ########.fr       */
+/*   Updated: 2025/11/25 13:45:25 by tmalpert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	conversion_attribution(char c, va_list args)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (c == 'c')
@@ -32,7 +32,7 @@ int	conversion_attribution(char c, va_list args)
 	else if (c == '%')
 		count += ft_putchar('%');
 	else if (c == 'p')
-		count += ft_jesaispas(va_arg(args, void *));
+		count += ft_adress(va_arg(args, void *));
 	else
 		return (0);
 	return (count);
@@ -60,4 +60,3 @@ int	ft_printf(const char *tab, ...)
 	}
 	return (count);
 }
-

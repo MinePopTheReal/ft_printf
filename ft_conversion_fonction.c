@@ -6,7 +6,7 @@
 /*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 10:53:37 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/11/25 13:12:18 by tmalpert         ###   ########.fr       */
+/*   Updated: 2025/11/25 13:46:10 by tmalpert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_putchar(char c)
 {
 	write(1, &c, 1);
-	return(1);
+	return (1);
 }
 
 int	ft_putstr(char *str)
@@ -98,18 +98,5 @@ int	ft_putnbr_hex(unsigned long int nb, unsigned int base, int cap)
 	}
 	else
 		count += ft_putchar(tab[nb]);
-	return (count);
-}
-
-int	ft_jesaispas(void	*p)
-{
-	unsigned long int	addr;
-	int					count;
-
-	if (!p)
-		return (ft_putstr("(nil)"));
-	addr = (unsigned long int)p;
-	count = ft_putstr("0x");
-	count += ft_putnbr_hex(addr, 16, 0);
 	return (count);
 }
