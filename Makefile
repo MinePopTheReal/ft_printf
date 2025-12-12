@@ -8,7 +8,7 @@ DEPS := $(patsubst %.c,$(BUILDDIR)/%.d,$(SRCS))
 
 ARFLAGS := rcs
 DEPS_FLAGS := -MP -MD -MF
-CFLAGS := -Wall -Wextra -Werror -g
+# CFLAGS := -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
@@ -25,7 +25,7 @@ test: $(NAME)
 	@echo "#######+++++++++++:::::-------...-------:::::+++++++++#######"
 	@echo "###########++++++++++::::::-Tester::::::++++++++++###########"
 	@echo "##################++++++++++:::::++++++++++##################"
-	@$(CC) main.c libft.a -L. -lftprintf -o main
+	@$(CC) main.c -L. -lftprintf -o main
 	@./main
 	@make fclean
 # 	@rm main
