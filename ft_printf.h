@@ -6,7 +6,7 @@
 /*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:53:49 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/11/25 13:45:40 by tmalpert         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:40:59 by tmalpert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdint.h>
+# include <stdbool.h>
 
 int		ft_printf(const char *tab, ...);
 int		ft_putchar(char c);
