@@ -6,64 +6,90 @@
 /*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:51:18 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/12 18:38:20 by tmalpert         ###   ########.fr       */
+/*   Updated: 2025/12/15 14:00:56 by tmalpert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-bool	conversion_attribution(char c, va_list args, int *count, int *argc)
+static	int	count_percent(const char *str)
 {
-	*argc += 1;
+	int	count;
+	int	i;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == '%')
+		{
+			count++;
+			i++;
+		}
+		i++;
+	}
+	return (count);
+}
+
+static bool	conversion_attribution(char c, t_attribution *attrib)
+{
+	attrib->argc += 1;
 	if (c == 'c')
-		*count += ft_putchar(va_arg(args, int));
+		attrib->count += ft_putchar(va_arg(attrib->args, int));
 	else if (c == 's')
-		*count += ft_putstr(va_arg(args, char *));
+		attrib->count += ft_putstr(va_arg(attrib->args, char *));
 	else if (c == 'd' || c == 'i')
-		*count += ft_putnbr(va_arg(args, int), 0);
+		attrib->count += ft_putnbr(va_arg(attrib->args, int), 0);
 	else if (c == 'u')
-		*count += ft_putnbr_u(va_arg(args, unsigned int), 10, 0);
+		attrib->count += ft_putnbr_u(va_arg(attrib->args, unsigned int), 10, 0);
 	else if (c == 'x')
-		*count += ft_putnbr_u(va_arg(args, int), 16, 0);
+		attrib->count += ft_putnbr_u(va_arg(attrib->args, int), 16, 0);
 	else if (c == 'X')
-		*count += ft_putnbr_u(va_arg(args, int), 16, 1);
+		attrib->count += ft_putnbr_u(va_arg(attrib->args, int), 16, 1);
 	else if (c == '%')
-		*count += ft_putchar('%');
+		attrib->count += ft_putchar('%');
 	else if (c == 'p')
-		*count += ft_adress(va_arg(args, void *));
+		attrib->count += ft_adress(va_arg(attrib->args, void *));
 	else
 	{
-		*count += ft_putchar('%');
+		if (count_percent(attrib->tab) > 1)
+			attrib->count += ft_putchar('%');
 		return (false);
 	}
 	return (true);
 }
 
-int	ft_printf(const char *tab, ...)
+static int	error(int argc, bool success, int count)
 {
-	va_list	args;
-	int		count;
-	bool	success;
-	int		argc;
-
-	argc = 0;
-	success = true;
-	count = 0;
-	if (!tab)
-		return (-1);
-	va_start(args, tab);
-	while (*tab)
-	{
-		if (*tab == '%')
-		{
-			if (!conversion_attribution(*++tab, args, &count, &argc))
-				success = false;
-		}
-		else
-			count += ft_putchar(*tab);
-		tab++;
-	}
 	if (argc == 1 && !success)
 		return (-1);
 	return (count);
+}
+
+int	ft_printf(const char *tab, ...)
+{
+	t_attribution	attrib;
+	size_t			i;
+
+	i = 0;
+	attrib.tab = tab;
+	attrib.argc = 0;
+	attrib.success = true;
+	attrib.count = 0;
+	if (!tab)
+		return (-1);
+	va_start(attrib.args, tab);
+	while (attrib.tab[i])
+	{
+		if (attrib.tab[i] == '%')
+		{
+			if (!conversion_attribution(attrib.tab[++i], &attrib))
+				attrib.success = false;
+		}
+		else
+			attrib.count += ft_putchar(attrib.tab[i]);
+		i++;
+	}
+	va_end(attrib.args);
+	return (error(attrib.argc, attrib.success, attrib.count));
 }
