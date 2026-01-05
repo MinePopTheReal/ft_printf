@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conversion_fonction.c                           :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 10:53:37 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/11/25 13:46:10 by tmalpert         ###   ########.fr       */
+/*   Updated: 2026/01/05 18:31:53 by tmalpert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int	ft_putnbr(int nb, int cap)
 	count = 0;
 	tab = "0123456789abcdef";
 	if (cap == 1)
+	{
 		tab = "0123456789ABCDEF";
+	}
 	if (n < 0)
 	{
 		count += ft_putchar('-');
@@ -97,6 +99,8 @@ int	ft_putnbr_hex(unsigned long int nb, unsigned int base, int cap)
 		count += ft_putchar(tab[nb % base]);
 	}
 	else
+	{
 		count += ft_putchar(tab[nb]);
+	}
 	return (count);
 }

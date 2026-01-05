@@ -6,7 +6,7 @@
 /*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:51:18 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/15 14:00:56 by tmalpert         ###   ########.fr       */
+/*   Updated: 2026/01/05 18:38:23 by tmalpert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,9 @@ int	ft_printf(const char *tab, ...)
 	}
 	va_end(attrib.args);
 	return (error(attrib.argc, attrib.success, attrib.count));
+}
+int main(void)
+{
+	printf("%d",ft_printf("je sais pas quoi mettre %p", (void *)551551154));
+	return (0);
 }
