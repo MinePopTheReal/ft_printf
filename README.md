@@ -27,17 +27,38 @@ In order to comply with the 42 Norm, I chose to use a structure to group several
 This avoids having too many parameters in the functions and keeps the code readable and compliant with the constraints imposed by the school.
 
 ## How to use
-To use this ft_printf, you must first download the project and compile it using make.
-This will generate an .a library that you can then integrate into your projects.
-(That said, you'd have to be slightly crazy to use my ft_printf rather than the real one.)
-The use of ft_printf looks like this: 
-```python
->>> ft_printf(“This is a test: %s”, “Hello world!”)
-This is a test: Hello world!
 
-# Another example
->>> ft_printf(“This is another test: %s %d %%”, “Hello world!”, 10)
-This is another test: Hello World! 10 %
+To use this ft_printf, you must first download the project and compile it using make.
+This will generate a static library that you can then link to your own projects.
+
+### Compilation
+The project includes a Makefile with several useful commands:
+
+ - ```make or make all```: Compiles the project and creates the static library libftprintf.a.
+
+ - ```make clean```: Removes all the object files generated during compilation (stored in the .build directory).
+
+ - ```make fclean```: Removes the object files and the compiled library libftprintf.a.
+
+ - ```make re```: Fully rebuilds the project by running fclean followed by all.
+
+The compiled object files are stored in the .build directory to keep the project folder clean.
+
+### Example usage:
+
+Once the library is compiled, you can link it to your program:
+```bash
+cc main.c -L. -lftprintf
+```
+#### Example:
+```c
+ft_printf("This is a test: %s\n", "Hello world!");
+ft_printf("This is another test: %s %d %%\n", "Hello world!", 10);
+```
+#### Output:
+```bash
+This is a test: Hello world!
+This is another test: Hello world! 10 %
 ```
 
 <small>*This readme was created outside of the 42 curriculum. I made it to make the project cleaner, which is why it is not presented in the same way as the following projects.*</small>

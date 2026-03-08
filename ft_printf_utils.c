@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 10:53:37 by tmalpert          #+#    #+#             */
-/*   Updated: 2026/01/05 18:31:53 by tmalpert         ###   ########.fr       */
+/*   Updated: 2026/03/08 19:39:18 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,74 +33,47 @@ int	ft_putstr(char *str)
 	return (i);
 }
 
-int	ft_putnbr(int nb, int cap)
+static int	print_nbr(unsigned long long n, int base, char *tab)
 {
-	long int	n;
-	char		*tab;
-	int			count;
+	int	count;
 
-	n = nb;
+	count = 0;
+	if (n >= (unsigned long long)base)
+		count += print_nbr(n / base, base, tab);
+	count += ft_putchar(tab[n % base]);
+	return (count);
+}
+
+int	putnbr_base(long long number, int base, bool is_upper)
+{
+	int						count;
+	char					*tab;
+	unsigned long long		nb;
+
 	count = 0;
 	tab = "0123456789abcdef";
-	if (cap == 1)
-	{
+	if (is_upper)
 		tab = "0123456789ABCDEF";
-	}
-	if (n < 0)
+	if (number < 0 && base == 10)
 	{
 		count += ft_putchar('-');
-		n *= -1;
-	}
-	if (n >= 10)
-	{
-		count += ft_putnbr((unsigned int)n / 10, cap);
-		count += ft_putchar(tab[(unsigned int)n % 10]);
+		nb = (unsigned long long)(-number);
 	}
 	else
-		count += ft_putchar(tab[n]);
+		nb = (unsigned long long)number;
+	count += print_nbr(nb, base, tab);
 	return (count);
 }
 
-int	ft_putnbr_u(unsigned int nb, unsigned int base, int cap)
+int	ft_adress(void	*p)
 {
-	char	*tab;
-	int		count;
+	unsigned long int	addr;
+	int					count;
 
-	count = 0;
-	tab = "0123456789abcdef";
-	if (cap == 1)
-	{
-		tab = "0123456789ABCDEF";
-	}
-	if (nb >= base)
-	{
-		count += ft_putnbr_u(nb / base, base, cap);
-		count += ft_putchar(tab[nb % base]);
-	}
-	else
-		count += ft_putchar(tab[nb]);
-	return (count);
-}
-
-int	ft_putnbr_hex(unsigned long int nb, unsigned int base, int cap)
-{
-	char	*tab;
-	int		count;
-
-	count = 0;
-	tab = "0123456789abcdef";
-	if (cap == 1)
-	{
-		tab = "0123456789ABCDEF";
-	}
-	if (nb >= base)
-	{
-		count += ft_putnbr_hex(nb / base, base, cap);
-		count += ft_putchar(tab[nb % base]);
-	}
-	else
-	{
-		count += ft_putchar(tab[nb]);
-	}
+	if (!p)
+		return (ft_putstr("(nil)"));
+	addr = (unsigned long int)p;
+	count = ft_putstr("0x");
+	count += putnbr_base(addr, 16, false);
 	return (count);
 }

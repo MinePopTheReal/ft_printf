@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:51:18 by tmalpert          #+#    #+#             */
-/*   Updated: 2026/01/06 10:05:36 by tmalpert         ###   ########.fr       */
+/*   Updated: 2026/03/08 19:38:11 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static bool	conversion_attribution(char c, t_attribution *attrib)
 	else if (c == 's')
 		attrib->count += ft_putstr(va_arg(attrib->args, char *));
 	else if (c == 'd' || c == 'i')
-		attrib->count += ft_putnbr(va_arg(attrib->args, int), 0);
+		attrib->count += putnbr_base((int)va_arg(attrib->args, int), 10, false);
 	else if (c == 'u')
-		attrib->count += ft_putnbr_u(va_arg(attrib->args, unsigned int), 10, 0);
+		attrib->count += putnbr_base((unsigned int)va_arg(attrib->args, unsigned int), 10, false);
 	else if (c == 'x')
-		attrib->count += ft_putnbr_u(va_arg(attrib->args, int), 16, 0);
+		attrib->count += putnbr_base((unsigned int)va_arg(attrib->args, unsigned int), 16, false);
 	else if (c == 'X')
-		attrib->count += ft_putnbr_u(va_arg(attrib->args, int), 16, 1);
+		attrib->count += putnbr_base((unsigned int)va_arg(attrib->args, unsigned int), 16, true);
 	else if (c == '%')
 		attrib->count += ft_putchar('%');
 	else if (c == 'p')

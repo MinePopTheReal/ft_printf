@@ -1,7 +1,7 @@
 NAME := libftprintf.a
 BUILDDIR := .build
 
-SRCS := ft_printf.c ft_printf_utils.c ft_printf_utils_2.c
+SRCS := ft_printf.c ft_printf_utils.c
 OBJS := $(patsubst %.c,$(BUILDDIR)/%.o,$(SRCS))
 DEPS := $(patsubst %.c,$(BUILDDIR)/%.d,$(SRCS))
 

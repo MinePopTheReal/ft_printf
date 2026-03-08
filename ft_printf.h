@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 15:53:49 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/17 10:04:10 by tmalpert         ###   ########.fr       */
+/*   Updated: 2026/03/08 19:40:10 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int		ft_putnbr(int nb, int cap);
 int		ft_putnbr_u(unsigned int nb, unsigned int base, int cap);
 int		ft_adress(void *p);
 int		ft_putnbr_hex(unsigned long int nb, unsigned int base, int cap);
+int 	putnbr_base(long long int number, int base, bool is_upper);
 
 #endif
